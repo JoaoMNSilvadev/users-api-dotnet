@@ -73,6 +73,18 @@ Ao executar o projeto, a documentação interativa estará disponível através 
 
 ![Listar Usuarios](images/listar-usuarios.png)
 
+### Atualizar Usúario
+
+![Deletar Usuario](images/atualizar-usuario.png)
+
+### Buscar Por ID
+
+![Buscar Por ID](images/buscar-usuario-por-id.png)
+
+### Deletar Usúario
+
+![Deletar Usuario](images/deletar-usuario.png)
+
 ## 📚 Aprendizados
 
 Durante o desenvolvimento deste projeto foram praticados conceitos importantes como:
