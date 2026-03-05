@@ -1,100 +1,100 @@
 # Users API - .NET 8
 
-API REST desenvolvida com **ASP.NET Core Web API** para gerenciamento de usuários.
-
-Projeto criado com foco em aprendizado de arquitetura básica, **Entity Framework Core** e boas práticas iniciais como uso de DTOs e separação de responsabilidades.
-
----
-
-## 🚀 Tecnologias Utilizadas
-
-- .NET 8  
-- ASP.NET Core Web API  
-- Entity Framework Core  
-- SQL Server  
-- Swagger  
-- Git  
-
----
-
-## 📁 Estrutura do Projeto
-
-O projeto está organizado nas seguintes camadas:
-
-- **Controllers** → Responsável pelos endpoints da API  
-- **Models** → Entidades do domínio  
-- **DTOs** → Objetos de transferência de dados (entrada e saída)  
-- **Data** → Contexto do banco de dados  
-- **Migrations** → Versionamento do banco  
-- **Services** → Estrutura preparada para camada de serviço  
-
----
-
-## 📌 Funcionalidades Implementadas
-
-CRUD completo de usuários:
-
-- `GET` → Listar todos  
-- `GET` por Id  
-- `POST` → Criação  
-- `PUT` → Atualização completa  
-- `PATCH` → Atualização parcial  
-- `DELETE` → Remoção  
-
-Outras implementações:
-
-- Separação de DTOs:
-  - `UserCreateDto`
-  - `UserUpdateDto`
-  - `UserSaidaDto`
-- Enum de status configurado para retornar como string  
-- Campo de senha protegido (não é retornado na resposta)  
-- Migrations configuradas e aplicadas  
-
----
-
-## 🗄️ Modelo de Usuário
-
-A entidade **Usuario** possui os seguintes campos:
-
-- Id  
-- Nome  
-- Email  
-- Senha  
-- DataNascimento  
-- Status  
-- DataCriacao  
-
----
-
-## ▶️ Como Executar o Projeto
-
-1. Clonar o repositório  
-2. Configurar a string de conexão no `appsettings.json`  
-3. Executar as migrations (caso necessário)  
-4. Rodar o projeto:
-dotnet run
-
-A documentação interativa estará disponível via **Swagger** ao iniciar a aplicação.
-
----
+API REST desenvolvida em **.NET 8** para gerenciamento de usuários.  
+O projeto foi criado com o objetivo de praticar conceitos fundamentais de desenvolvimento **Back-end**, organização de código e boas práticas na construção de APIs.
 
 ## 🎯 Objetivo do Projeto
 
 Este projeto foi desenvolvido para praticar:
 
-- Construção de APIs REST  
-- Integração com banco de dados usando **EF Core**  
-- Organização em camadas  
-- Uso de DTOs  
-- Controle de retorno de dados sensíveis  
-- Versionamento com Git  
+- Construção de APIs REST
+- Arquitetura em camadas
+- Uso de DTOs
+- Validação de dados
+- Boas práticas de retorno HTTP
+- Organização de código em projetos Back-end
+- Versionamento com Git e GitHub
 
----
+## 🚀 Tecnologias Utilizadas
 
-## 📌 Próximos Passos
+- C#
+- .NET 8
+- ASP.NET Core
+- Swagger
+- LINQ
+- Git
+- GitHub
 
-- Implementação de validações com **DataAnnotations**  
-- Criação da camada de **Service**  
-- Melhorias nos **status codes**  
-- Evolução da arquitetura  
+## 📂 Estrutura do Projeto
+
+O projeto foi organizado de forma simples para separar responsabilidades:
+
+- **Controllers** → Responsáveis pelos endpoints da API  
+- **Services** → Contêm a lógica de negócio  
+- **Models** → Representação das entidades do sistema  
+- **DTOs** → Objetos utilizados para entrada e saída de dados  
+- **Validations** → Regras de validação dos dados recebidos
+
+## 📌 Funcionalidades
+
+A API permite realizar operações básicas de gerenciamento de usuários:
+
+- Criar usuário
+- Listar usuários
+- Buscar usuário por ID
+- Atualizar usuário
+- Deletar usuário
+
+## 📡 Endpoints
+
+| Método | Endpoint | Descrição |
+|------|------|------|
+| POST | /usuario | Criar um novo usuário |
+| GET | /usuario | Listar todos os usuários |
+| GET | /usuario/{id} | Buscar usuário por ID |
+| PATCH | /usuario/{id} | Atualizar dados do usuário |
+| DELETE | /usuario/{id} | Remover usuário |
+
+## 📑 Documentação da API
+
+Ao executar o projeto, a documentação interativa estará disponível através do **Swagger**.
+
+## 🖥️ Demonstração da API
+
+### Swagger
+
+![Swagger](images/swagger.png)
+
+### Criar Usuário
+
+![Criar Usuario](images/criar-usuario.png)
+
+### Listar Usuários
+
+![Listar Usuarios](images/listar-usuarios.png)
+
+## 📚 Aprendizados
+
+Durante o desenvolvimento deste projeto foram praticados conceitos importantes como:
+
+- Estruturação de APIs REST
+- Separação de responsabilidades
+- Manipulação de dados com DTOs
+- Validação de dados de entrada
+- Uso de serviços para regras de negócio
+
+## 📌 Próximas Melhorias
+
+Algumas melhorias que podem ser adicionadas no futuro:
+
+- Implementação de autenticação com JWT
+- Integração com banco de dados
+- Paginação de resultados
+- Camada de Repository
+- Desenvolvimento de um front-end utilizando React
+
+## 👨‍💻 Autor
+
+João Matheus do Nascimento Silva
+
+Estudante de **Técnico em Desenvolvimento de Sistemas** e desenvolvedor **Back-end .NET em formação**.
