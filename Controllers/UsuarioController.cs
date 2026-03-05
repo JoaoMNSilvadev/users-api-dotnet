@@ -6,19 +6,20 @@ using Microsoft.AspNetCore.Mvc;
 using UsersAPI.Data;
 using UsersAPI.DTos;
 using UsersAPI.Models;
+using UsersAPI.Services;
 
 namespace UsersAPI.Controllers
 {
-    [ApiController]
-    [Route("[controller]")]
-    public class UsuarioController : ControllerBase
-    {
-        private readonly AppDbContext _context; 
+   [ApiController]
+[Route("[controller]")]
+public class UsuarioController : ControllerBase
+{
+    private readonly IUsuarioService _service;
 
-        public UsuarioController(AppDbContext context)
-        {
-            _context = context;
-        }
+    public UsuarioController(IUsuarioService service)
+    {
+        _service = service;
+    }
 
         private static UsuarioSaidaDto MapearParaDto(Usuario u)
 {
@@ -34,79 +35,57 @@ namespace UsersAPI.Controllers
 }
 
         [HttpPost]
-        public IActionResult CriarUsuario(UsuarioCreateDto dto)
-        {
-            var usuario = new Usuario
-            {
-                Nome = dto.Nome,
-                Email = dto.Email,
-                Senha = dto.Senha,
-                DataNascimento = dto.DataNascimento,
-                Status = dto.Status,
-                DataCriacao = DateTime.Now
-            };
-            _context.Usuarios.Add(usuario);
-            _context.SaveChanges();
-            return Ok();
-        }
+public IActionResult CriarUsuario(UsuarioCreateDto dto)
+{
+    var usuario = _service.CriarUsuario(dto);
 
-        [HttpPatch("{id}")]
-        public IActionResult AtualizarUsuario(int id, UsuarioUpdateDto dto)
-        {
-            var usuario = _context.Usuarios.Find(id);
+    return CreatedAtAction(
+        nameof(ObterUsuarioPorId),
+        new { id = usuario.Id },
+        usuario
+    );
+}
+       [HttpPatch("{id}")]
+public IActionResult AtualizarUsuario(int id, UsuarioUpdateDto dto)
+{
+    var atualizado = _service.AtualizarUsuario(id, dto);
 
-    if (usuario == null)
+    if (!atualizado)
         return NotFound();
 
-    if (dto.Nome != null)
-        usuario.Nome = dto.Nome;
-
-    if (dto.Email != null)
-        usuario.Email = dto.Email;
-
-    if (dto.DataNascimento.HasValue)
-        usuario.DataNascimento = dto.DataNascimento.Value;
-
-    if (dto.Status.HasValue)
-        usuario.Status = dto.Status.Value;
-
-    _context.SaveChanges();
-
     return NoContent();
-        }
+}
 
         [HttpDelete("{id}")]
         public IActionResult DeletarUsuario(int id)
         {
-            var usuarioExistente = _context.Usuarios.Find(id);
-            if (usuarioExistente == null)
-            {
+            var deletado = _service.DeletarUsuario(id);
+
+            if (!deletado)
                 return NotFound();
-            }
-            _context.Usuarios.Remove(usuarioExistente);
-            _context.SaveChanges();
-            return Ok();
+
+            return NoContent();
         }
 
-        [HttpGet]
-        public IActionResult ListarUsuarios()
-        {
-            var usuarios = _context.Usuarios
-            .Select(u => MapearParaDto(u))
-            .ToList();
-            return Ok(usuarios);
-        }
+        
+
+     [HttpGet]
+public IActionResult ListarUsuarios()
+{
+    var usuarios = _service.ListarUsuarios();
+    return Ok(usuarios.Select(MapearParaDto).ToList());
+}
 
         [HttpGet("{id}")]
         public IActionResult ObterUsuarioPorId(int id)
         {
-            var usuario = _context.Usuarios.Find(id);
+            var usuario = _service.ObterUsuarioPorId(id);
         
             if (usuario == null)
             {
                 return NotFound();
             }
-            return Ok(usuario);
+            return Ok(MapearParaDto(usuario));
         }
         
     }
